@@ -29,7 +29,7 @@ You must set the following environment variables to enable Packer to push metada
 
 You can set these additional environment variables to control how metadata is pushed to the registry.
 
-- `HCP_PACKER_BUILD_FINGERPRINT` - A unique identifier assigned to each build. HCP Packer uses this identifier to determine if metadata for a build on the registry is complete. By default, HCP Packer uses the HEAD Git SHA for the template file. If the template is not version controlled, you must set this environment variable to a unique value before running `packer build`. 
+- `HCP_PACKER_BUILD_FINGERPRINT` - A unique identifier assigned to each build. HCP Packer uses this identifier to determine if metadata for a build on the registry is complete. By default, Packer will generate a new unique fingerprint for the template file on each new build. If you want to continue building an iteration, you will need to either set a unique fingerprint as HCP_PACKER_BUILD_FINGERPRINT before starting the build or you may use the generated one on subsequent builds.
 
 - `HCP_PACKER_REGISTRY`    -  When set, Packer does not push image metadata to HCP Packer from an otherwise configured template. Allowed values are [0|OFF].
 

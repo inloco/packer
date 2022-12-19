@@ -96,6 +96,8 @@ func (c *BuildCommand) RunContext(buildCtx context.Context, cla *BuildArgs) int 
 		return ret
 	}
 
+	defer hcpRegistry.IterationStatusSummary(c.Ui)
+
 	err := hcpRegistry.PopulateIteration(buildCtx)
 	if err != nil {
 		return writeDiags(c.Ui, nil, hcl.Diagnostics{

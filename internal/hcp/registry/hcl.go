@@ -3,6 +3,7 @@ package registry
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/stable/2021-04-30/models"
@@ -42,6 +43,13 @@ func (h *HCLMetadataRegistry) PopulateIteration(ctx context.Context) error {
 
 	h.configuration.HCPVars["iterationID"] = cty.StringVal(iterationID)
 
+	sha, err := getGitSHA(h.configuration.Basedir)
+	if err != nil {
+		log.Printf("failed to get GIT SHA from environment, won't set as build labels")
+	} else {
+		h.bucket.Iteration.AddSHAToBuildLabels(sha)
+	}
+
 	return nil
 }
 
@@ -68,6 +76,11 @@ func (h *HCLMetadataRegistry) CompleteBuild(
 		name = cb.Type
 	}
 	return h.bucket.completeBuild(ctx, name, artifacts, buildErr)
+}
+
+// IterationStatusSummary prints a status report in the UI if the iteration is not yet done
+func (h *HCLMetadataRegistry) IterationStatusSummary(ui sdkpacker.Ui) {
+	h.bucket.Iteration.iterationStatusSummary(ui)
 }
 
 func NewHCLMetadataRegistry(config *hcl2template.PackerConfig) (*HCLMetadataRegistry, hcl.Diagnostics) {
