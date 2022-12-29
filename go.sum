@@ -738,8 +738,6 @@ github.com/hashicorp/packer-plugin-qemu v1.0.8 h1:7RBToKsCH50vo7H+gviuYR+3dknIQh
 github.com/hashicorp/packer-plugin-qemu v1.0.8/go.mod h1:BpWIpVpOoPFV9Ppmzq4DP/S0QNoh1R+7DUCqxHdXc+Y=
 github.com/hashicorp/packer-plugin-salt v1.0.0 h1:bLGdlDG2nLyOzjp/5d2rmZ9XVxDeDUGejOK3wayqEL4=
 github.com/hashicorp/packer-plugin-salt v1.0.0/go.mod h1:onggPITzeB6LPSW8XlSobu8eI6yj3IMUi5cS6vWnL7s=
-github.com/hashicorp/packer-plugin-sdk v0.3.2 h1:4Kqq7B8CRDMbfZmkloyz11t1hfqazJuBbW8ZFo4QlN4=
-github.com/hashicorp/packer-plugin-sdk v0.3.2/go.mod h1:XZRvL9kRqJJtB6rf9Lu2zWLJbf2/4ImWXDjp9O9UQGE=
 github.com/hashicorp/packer-plugin-tencentcloud v1.0.5 h1:L0OWx9fSu785mCoCA9dr15WTup6ILNFAYV6HTld0OXQ=
 github.com/hashicorp/packer-plugin-tencentcloud v1.0.5/go.mod h1:XRfZLgzsf6aFgE5W5W5rHadjVLIbI36e904aiGkJyTI=
 github.com/hashicorp/packer-plugin-triton v1.0.2 h1:Yla93I7Jl/WXCuCRWYYR0J8/57X4puGLZ07wBn+QS9w=
@@ -781,6 +779,8 @@ github.com/imdario/mergo v0.3.11/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH
 github.com/imdario/mergo v0.3.12 h1:b6R2BslTbIEToALKP7LxUvijTsNI9TAe80pLWN2g/HU=
 github.com/imdario/mergo v0.3.12/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
+github.com/inloco/packer-plugin-sdk v0.3.2-incognia.2 h1:zLTYHi170mq7WNug0C8O8M++5uBkQz/ynBSKGOwCCMo=
+github.com/inloco/packer-plugin-sdk v0.3.2-incognia.2/go.mod h1:XZRvL9kRqJJtB6rf9Lu2zWLJbf2/4ImWXDjp9O9UQGE=
 github.com/jackc/fake v0.0.0-20150926172116-812a484cc733/go.mod h1:WrMFNQdiFJ80sQsxDoMokWK1W5TQtxBFNpzWTD84ibQ=
 github.com/jackc/pgx v3.3.0+incompatible/go.mod h1:0ZGrqGqkRlliWnWB4zKnWtjbSWbGkVEFm4TeybAXq+I=
 github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 h1:BQSFePA1RWJOlocH6Fxy8MmwDt+yVQYULKfN0RoTN8A=

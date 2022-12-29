@@ -1,5 +1,7 @@
 module github.com/hashicorp/packer
 
+go 1.18
+
 require (
 	cloud.google.com/go v0.104.0 // indirect
 	github.com/biogo/hts v1.4.3
@@ -264,4 +266,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-go 1.18
+replace github.com/hashicorp/packer-plugin-sdk => github.com/inloco/packer-plugin-sdk v0.3.2-incognia.2
