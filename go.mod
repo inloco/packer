@@ -48,15 +48,15 @@ require (
 	github.com/ulikunitz/xz v0.5.10
 	github.com/zclconf/go-cty v1.10.0
 	github.com/zclconf/go-cty-yaml v1.0.1
-	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d // indirect
-	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4
-	golang.org/x/net v0.4.0
+	golang.org/x/crypto v0.21.0 // indirect
+	golang.org/x/mod v0.8.0
+	golang.org/x/net v0.23.0
 	golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1
-	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4
-	golang.org/x/sys v0.3.0 // indirect
-	golang.org/x/term v0.3.0 // indirect
-	golang.org/x/text v0.5.0 // indirect
-	golang.org/x/tools v0.1.12
+	golang.org/x/sync v0.1.0
+	golang.org/x/sys v0.18.0 // indirect
+	golang.org/x/term v0.18.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/tools v0.6.0
 	google.golang.org/api v0.97.0 // indirect
 	google.golang.org/grpc v1.49.0
 )
