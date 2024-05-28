@@ -150,6 +150,9 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go }}
+      - run: |
+          go mod edit -replace=github.com/zclconf/go-cty=github.com/nywilken/go-cty@v1.13.3
+          go mod tidy
       - name: Go Build
         env:
           GOOS: ${{ matrix.goos }}
