@@ -77,52 +77,52 @@ jobs:
           sha="$(git rev-parse HEAD)"
           echo "::set-output name=ldflags::"-s -w -X \'$project/version.GitCommit=$sha\'""
 
-  build-other:
-    needs:
-      - get-product-version
-      - get-go-version
-      - set-ld-flags
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        goos: [ freebsd, windows, netbsd, openbsd, solaris ]
-        goarch: [ "386", "amd64", "arm"]
-        go: [ "${{ needs.get-go-version.outputs.go-version }}" ]
-        exclude:
-          - goos: solaris
-            goarch: 386
-          - goos: solaris
-            goarch: arm
-          - goos: windows
-            goarch: arm
-      fail-fast: true
-
-    name: Go ${{ matrix.go }} ${{ matrix.goos }} ${{ matrix.goarch }} build
-    env:
-      GOPRIVATE: "github.com/hashicorp"
-      GO111MODULE: on
-      LD_FLAGS: ${{ needs.set-ld-flags.outputs.ldflags }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup go
-        uses: actions/setup-go@v2
-        with:
-          go-version: ${{ matrix.go }}
-      - name: Go Build
-        env:
-          GOOS: ${{ matrix.goos }}
-          GOARCH: ${{ matrix.goarch }}
-          CGO_ENABLED: 0
-        run: |
-          mkdir -p dist out
-          unset GOPATH;
-          go build -v -tags "${{ env.GO_TAGS }}" -ldflags "${{ env.LD_FLAGS }}" -o dist/ .
-          zip -r -j out/${{ env.REPO_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip dist/
-      - uses: actions/upload-artifact@v2
-        with:
-          name: ${{ env.REPO_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
-          path: out/${{ env.REPO_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
-
+#  build-other:
+#    needs:
+#      - get-product-version
+#      - get-go-version
+#      - set-ld-flags
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        goos: [ freebsd, windows, netbsd, openbsd, solaris ]
+#        goarch: [ "386", "amd64", "arm"]
+#        go: [ "${{ needs.get-go-version.outputs.go-version }}" ]
+#        exclude:
+#          - goos: solaris
+#            goarch: 386
+#          - goos: solaris
+#            goarch: arm
+#          - goos: windows
+#            goarch: arm
+#      fail-fast: true
+#
+#    name: Go ${{ matrix.go }} ${{ matrix.goos }} ${{ matrix.goarch }} build
+#    env:
+#      GOPRIVATE: "github.com/hashicorp"
+#      GO111MODULE: on
+#      LD_FLAGS: ${{ needs.set-ld-flags.outputs.ldflags }}
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Setup go
+#        uses: actions/setup-go@v2
+#        with:
+#          go-version: ${{ matrix.go }}
+#      - name: Go Build
+#        env:
+#          GOOS: ${{ matrix.goos }}
+#          GOARCH: ${{ matrix.goarch }}
+#          CGO_ENABLED: 0
+#        run: |
+#          mkdir -p dist out
+#          unset GOPATH;
+#          go build -v -tags "${{ env.GO_TAGS }}" -ldflags "${{ env.LD_FLAGS }}" -o dist/ .
+#          zip -r -j out/${{ env.REPO_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip dist/
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: ${{ env.REPO_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+#          path: out/${{ env.REPO_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+#
   build-linux:
     needs:
       - get-product-version
@@ -190,72 +190,72 @@ jobs:
           name: ${{ env.DEB_PACKAGE }}
           path: out/${{ env.DEB_PACKAGE }}
 
-  build-darwin:
-    needs:
-      - get-product-version
-      - get-go-version
-      - set-ld-flags
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        goos: [ darwin ]
-        goarch: [ "amd64", "arm64" ]
-        go: [ "${{ needs.get-go-version.outputs.go-version }}" ]
-      fail-fast: true
-    name: Go ${{ matrix.go }} ${{ matrix.goos }} ${{ matrix.goarch }} build
+#  build-darwin:
+#    needs:
+#      - get-product-version
+#      - get-go-version
+#      - set-ld-flags
+#    runs-on: macos-latest
+#    strategy:
+#      matrix:
+#        goos: [ darwin ]
+#        goarch: [ "amd64", "arm64" ]
+#        go: [ "${{ needs.get-go-version.outputs.go-version }}" ]
+#      fail-fast: true
+#    name: Go ${{ matrix.go }} ${{ matrix.goos }} ${{ matrix.goarch }} build
+#
+#    env:
+#      GOPRIVATE: "github.com/hashicorp"
+#      GO111MODULE: on
+#      LD_FLAGS: ${{ needs.set-ld-flags.outputs.ldflags }}
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Setup go
+#        uses: actions/setup-go@v2
+#        with:
+#          go-version: ${{ matrix.go }}
+#      - name: Go Build
+#        env:
+#          GOOS: ${{ matrix.goos }}
+#          GOARCH: ${{ matrix.goarch }}
+#          CGO_ENABLED: 0
+#        run: |
+#          mkdir -p dist out
+#          unset GOPATH;
+#          go build -v -tags "${{ env.GO_TAGS }} netcgo" -ldflags "${{ env.LD_FLAGS }}" -o dist/ .
+#          zip -r -j out/${{ env.REPO_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip dist/
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: ${{ env.REPO_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+#          path: out/${{ env.REPO_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
 
-    env:
-      GOPRIVATE: "github.com/hashicorp"
-      GO111MODULE: on
-      LD_FLAGS: ${{ needs.set-ld-flags.outputs.ldflags }}
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup go
-        uses: actions/setup-go@v2
-        with:
-          go-version: ${{ matrix.go }}
-      - name: Go Build
-        env:
-          GOOS: ${{ matrix.goos }}
-          GOARCH: ${{ matrix.goarch }}
-          CGO_ENABLED: 0
-        run: |
-          mkdir -p dist out
-          unset GOPATH;
-          go build -v -tags "${{ env.GO_TAGS }} netcgo" -ldflags "${{ env.LD_FLAGS }}" -o dist/ .
-          zip -r -j out/${{ env.REPO_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip dist/
-      - uses: actions/upload-artifact@v2
-        with:
-          name: ${{ env.REPO_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
-          path: out/${{ env.REPO_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
-
-  build-docker:
-    name: Docker light ${{ matrix.arch }} build
-    needs:
-      - get-product-version
-      - build-linux
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        arch: [ "arm", "arm64", "386", "amd64" ]
-    env:
-      version: ${{ needs.get-product-version.outputs.product-version }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Docker Build (Action)
-        uses: hashicorp/actions-docker-build@v1
-        with:
-          version: ${{ env.version }}
-          target: release-light
-          arch: ${{ matrix.arch }}
-          tags: |
-            docker.io/hashicorp/${{ env.REPO_NAME }}:light
-            docker.io/hashicorp/${{ env.REPO_NAME }}:light-${{ env.version }}
-            docker.io/hashicorp/${{ env.REPO_NAME }}:${{ env.version }}
-            public.ecr.aws/hashicorp/${{ env.REPO_NAME }}:light
-            public.ecr.aws/hashicorp/${{ env.REPO_NAME }}:light-${{ env.version }}
-            public.ecr.aws/hashicorp/${{ env.REPO_NAME }}:${{ env.version }}
-          dev_tags: |
-            docker.io/hashicorppreview/${{ env.REPO_NAME }}:${{ env.version }}
-            docker.io/hashicorppreview/${{ env.REPO_NAME }}:${{ env.version }}-${{ github.sha }}
+#  build-docker:
+#    name: Docker light ${{ matrix.arch }} build
+#    needs:
+#      - get-product-version
+#      - build-linux
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        arch: [ "arm", "arm64", "386", "amd64" ]
+#    env:
+#      version: ${{ needs.get-product-version.outputs.product-version }}
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Docker Build (Action)
+#        uses: hashicorp/actions-docker-build@v1
+#        with:
+#          version: ${{ env.version }}
+#          target: release-light
+#          arch: ${{ matrix.arch }}
+#          tags: |
+#            docker.io/hashicorp/${{ env.REPO_NAME }}:light
+#            docker.io/hashicorp/${{ env.REPO_NAME }}:light-${{ env.version }}
+#            docker.io/hashicorp/${{ env.REPO_NAME }}:${{ env.version }}
+#            public.ecr.aws/hashicorp/${{ env.REPO_NAME }}:light
+#            public.ecr.aws/hashicorp/${{ env.REPO_NAME }}:light-${{ env.version }}
+#            public.ecr.aws/hashicorp/${{ env.REPO_NAME }}:${{ env.version }}
+#          dev_tags: |
+#            docker.io/hashicorppreview/${{ env.REPO_NAME }}:${{ env.version }}
+#            docker.io/hashicorppreview/${{ env.REPO_NAME }}:${{ env.version }}-${{ github.sha }}
