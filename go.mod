@@ -75,7 +75,7 @@ require (
 	github.com/hashicorp/packer-plugin-hyperone v1.0.1
 	github.com/hashicorp/packer-plugin-hyperv v1.1.3
 	github.com/hashicorp/packer-plugin-inspec v1.0.0
-	github.com/hashicorp/packer-plugin-jdcloud v1.0.2
+	github.com/hashicorp/packer-plugin-jdcloud v1.0.1
 	github.com/hashicorp/packer-plugin-linode v1.0.3
 	github.com/hashicorp/packer-plugin-lxc v1.0.2
 	github.com/hashicorp/packer-plugin-lxd v1.0.2

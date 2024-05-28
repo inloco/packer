@@ -594,8 +594,8 @@ github.com/hashicorp/packer-plugin-hyperv v1.1.3 h1:PF7Yflb1bP9VLJvii+lj6zDReOu5
 github.com/hashicorp/packer-plugin-hyperv v1.1.3/go.mod h1:1oippy5HIvv4/xm5w0luvCfdDuPFTFgQhs5KcKTQXMs=
 github.com/hashicorp/packer-plugin-inspec v1.0.0 h1:6qRgH90Q+L3HSzo5UvuSozzS4VzU+ckkwJi9pMHYW1M=
 github.com/hashicorp/packer-plugin-inspec v1.0.0/go.mod h1:SsVyBs8b/g1wMC+4HgZQWT01kqxrwprA7dKxHAIRFKw=
-github.com/hashicorp/packer-plugin-jdcloud v1.0.2 h1:r50Em5PaRE2DIB4qcoOm0AGtt7V1BLYyz2OvH489cqo=
-github.com/hashicorp/packer-plugin-jdcloud v1.0.2/go.mod h1:NQlaez4P/dGcr6mTACHpyq8Xl5R6XoZ0zsEH4UHpwPM=
+github.com/hashicorp/packer-plugin-jdcloud v1.0.1 h1:qgecywtT8EqGiHdvopC36eBz1lSZs336w7X2q+y+UY0=
+github.com/hashicorp/packer-plugin-jdcloud v1.0.1/go.mod h1:1i/cCievlQE+grHJWUxhwi5nzwSXt9n0WmcHpFVMt5I=
 github.com/hashicorp/packer-plugin-linode v1.0.3 h1:CHE4G5GsgT8CEiMn7FBsckBFsfwUF+0i0b/t+a0PyEs=
 github.com/hashicorp/packer-plugin-linode v1.0.3/go.mod h1:zxEZrwpN8X1L1P3QlRvaT5asH33xdx62/qPIVnqycbA=
 github.com/hashicorp/packer-plugin-lxc v1.0.2 h1:JvIkbSynft+9JAi1uPEVHesIe02OX2yL9rPj1Ud0kM8=
