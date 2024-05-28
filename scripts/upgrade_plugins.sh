@@ -62,4 +62,4 @@ do
    sleep 1
 done
 
-go mod tidy -compat=1.18
+go mod tidy -compat=1.21
