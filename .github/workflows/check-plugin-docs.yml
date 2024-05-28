@@ -9,11 +9,14 @@
 
 name: "website: Check plugin docs"
 on:
-  pull_request:
-    paths:
-      - "website/**"
-  schedule:
-    - cron: "45 0 * * *"
+  push:
+    branches:
+    - main
+  # pull_request:
+  #   paths:
+  #     - "website/**"
+  # schedule:
+  #   - cron: "45 0 * * *"
 
 permissions:
   contents: read
