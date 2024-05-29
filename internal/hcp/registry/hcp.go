@@ -114,7 +114,7 @@ func withPackerEnvConfiguration(bucket *Bucket) hcl.Diagnostics {
 // getGitSHA returns the HEAD commit for some template dir defined in baseDir.
 // If the base directory is not under version control an error is returned.
 func getGitSHA(baseDir string) (string, error) {
-	r, err := git.PlainOpenWithOptions(baseDir, &git.PlainOpenOptions{
+	r, err := git.PlainOpenWithOptions(baseDir, &git.PlainOpenOptions{ //nolint:typecheck
 		DetectDotGit: true,
 	})
 
