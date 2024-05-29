@@ -292,6 +292,6 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/hashicorp/packer-plugin-sdk => github.com/inloco/packer-plugin-sdk v0.3.2-incognia.4
+replace github.com/hashicorp/packer-plugin-sdk => github.com/inloco/packer-plugin-sdk v0.3.3
 
 replace github.com/zclconf/go-cty => github.com/nywilken/go-cty v1.13.3
