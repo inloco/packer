@@ -82,49 +82,49 @@ jobs:
           name: metadata.json
           path: ${{ steps.generate-metadata-file.outputs.filepath }}
   
-  build-other:
-    needs:
-      - set-product-version
-      - get-go-version
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        goos: [ freebsd, windows, netbsd, openbsd, solaris ]
-        goarch: [ "386", "amd64", "arm"]
-        go: [ "${{ needs.get-go-version.outputs.go-version }}" ]
-        exclude:
-          - goos: solaris
-            goarch: 386
-          - goos: solaris
-            goarch: arm
-          - goos: windows
-            goarch: arm
-      fail-fast: true
+  # build-other:
+  #   needs:
+  #     - set-product-version
+  #     - get-go-version
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       goos: [ freebsd, windows, netbsd, openbsd, solaris ]
+  #       goarch: [ "386", "amd64", "arm"]
+  #       go: [ "${{ needs.get-go-version.outputs.go-version }}" ]
+  #       exclude:
+  #         - goos: solaris
+  #           goarch: 386
+  #         - goos: solaris
+  #           goarch: arm
+  #         - goos: windows
+  #           goarch: arm
+  #     fail-fast: true
 
-    name: Go ${{ matrix.go }} ${{ matrix.goos }} ${{ matrix.goarch }} build
+  #   name: Go ${{ matrix.go }} ${{ matrix.goos }} ${{ matrix.goarch }} build
 
-    env:
-      GOPRIVATE: "github.com/hashicorp"
-      GO111MODULE: on
-    steps:
-      - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
-      - name: Go Build
-        env:
-          PRODUCT_VERSION: ${{ needs.set-product-version.outputs.product-version }}
-          PRERELEASE_VERSION: ${{ needs.set-product-version.outputs.product-prerelease-version }}
-          LD_FLAGS: "${{ needs.set-product-version.outputs.set-ld-flags}}"
-          CGO_ENABLED: "0"
-        uses: hashicorp/actions-go-build@v1
-        with:
-          product_name: ${{ env.REPO_NAME }}
-          product_version: ${{ needs.set-product-version.outputs.product-version }}
-          go_version: ${{ matrix.go }}
-          os: ${{ matrix.goos }}
-          arch: ${{ matrix.goarch }}
-          reproducible: report
-          instructions: |-
-            cp LICENSE "$TARGET_DIR/LICENSE.txt"
-            go build -o "$BIN_PATH" -ldflags="$LD_FLAGS" -trimpath -buildvcs=false    
+  #   env:
+  #     GOPRIVATE: "github.com/hashicorp"
+  #     GO111MODULE: on
+  #   steps:
+  #     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+  #     - name: Go Build
+  #       env:
+  #         PRODUCT_VERSION: ${{ needs.set-product-version.outputs.product-version }}
+  #         PRERELEASE_VERSION: ${{ needs.set-product-version.outputs.product-prerelease-version }}
+  #         LD_FLAGS: "${{ needs.set-product-version.outputs.set-ld-flags}}"
+  #         CGO_ENABLED: "0"
+  #       uses: hashicorp/actions-go-build@v1
+  #       with:
+  #         product_name: ${{ env.REPO_NAME }}
+  #         product_version: ${{ needs.set-product-version.outputs.product-version }}
+  #         go_version: ${{ matrix.go }}
+  #         os: ${{ matrix.goos }}
+  #         arch: ${{ matrix.goarch }}
+  #         reproducible: report
+  #         instructions: |-
+  #           cp LICENSE "$TARGET_DIR/LICENSE.txt"
+  #           go build -o "$BIN_PATH" -ldflags="$LD_FLAGS" -trimpath -buildvcs=false    
 
   build-linux:
     needs:
@@ -197,97 +197,97 @@ jobs:
           name: ${{ env.DEB_PACKAGE }}
           path: out/${{ env.DEB_PACKAGE }}
 
-  build-darwin:
-    needs:
-      - set-product-version
-      - get-go-version
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        goos: [ darwin ]
-        goarch: [ "amd64", "arm64" ]
-        go: [ "${{ needs.get-go-version.outputs.go-version }}" ]
-      fail-fast: true
-    name: Go ${{ matrix.go }} ${{ matrix.goos }} ${{ matrix.goarch }} build
+  # build-darwin:
+  #   needs:
+  #     - set-product-version
+  #     - get-go-version
+  #   runs-on: macos-latest
+  #   strategy:
+  #     matrix:
+  #       goos: [ darwin ]
+  #       goarch: [ "amd64", "arm64" ]
+  #       go: [ "${{ needs.get-go-version.outputs.go-version }}" ]
+  #     fail-fast: true
+  #   name: Go ${{ matrix.go }} ${{ matrix.goos }} ${{ matrix.goarch }} build
 
-    env:
-      GOPRIVATE: "github.com/hashicorp"
-      GO111MODULE: on
+  #   env:
+  #     GOPRIVATE: "github.com/hashicorp"
+  #     GO111MODULE: on
 
-    steps:
-      - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
-      - name: Go Build
-        env:
-          PRODUCT_VERSION: ${{ needs.set-product-version.outputs.product-version }}
-          PRERELEASE_VERSION: ${{ needs.set-product-version.outputs.product-prerelease-version }}
-          LD_FLAGS: "${{ needs.set-product-version.outputs.set-ld-flags}}"
-          CGO_ENABLED: "0"
-        uses: hashicorp/actions-go-build@v1
-        with:
-          product_name: ${{ env.REPO_NAME }}
-          product_version: ${{ needs.set-product-version.outputs.product-version }}
-          go_version: ${{ matrix.go }}
-          os: ${{ matrix.goos }}
-          arch: ${{ matrix.goarch }}
-          reproducible: report
-          instructions: |-
-            cp LICENSE "$TARGET_DIR/LICENSE.txt"
-            go build -o "$BIN_PATH" -ldflags="$LD_FLAGS" -tags netcgo -trimpath -buildvcs=false
+  #   steps:
+  #     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+  #     - name: Go Build
+  #       env:
+  #         PRODUCT_VERSION: ${{ needs.set-product-version.outputs.product-version }}
+  #         PRERELEASE_VERSION: ${{ needs.set-product-version.outputs.product-prerelease-version }}
+  #         LD_FLAGS: "${{ needs.set-product-version.outputs.set-ld-flags}}"
+  #         CGO_ENABLED: "0"
+  #       uses: hashicorp/actions-go-build@v1
+  #       with:
+  #         product_name: ${{ env.REPO_NAME }}
+  #         product_version: ${{ needs.set-product-version.outputs.product-version }}
+  #         go_version: ${{ matrix.go }}
+  #         os: ${{ matrix.goos }}
+  #         arch: ${{ matrix.goarch }}
+  #         reproducible: report
+  #         instructions: |-
+  #           cp LICENSE "$TARGET_DIR/LICENSE.txt"
+  #           go build -o "$BIN_PATH" -ldflags="$LD_FLAGS" -tags netcgo -trimpath -buildvcs=false
 
-  build-docker-light:
-    name: Docker light ${{ matrix.arch }} build
-    needs:
-      - set-product-version
-      - build-linux
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        arch: [ "arm", "arm64", "386", "amd64" ]
-    env:
-      version: ${{ needs.set-product-version.outputs.product-version }}
-    steps:
-      - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
-      - name: Docker Build (Action)
-        uses: hashicorp/actions-docker-build@v2
-        with:
-          version: ${{ env.version }}
-          target: release-light
-          arch: ${{ matrix.arch }}
-          tags: |
-            ${{ steps.set-product-version.output.prerelease-product-version == '' && format('docker.io/hashicorp/{0}:light', env.REPO_NAME) }}
-            docker.io/hashicorp/${{ env.REPO_NAME }}:light-${{ env.version }}
-            docker.io/hashicorp/${{ env.REPO_NAME }}:${{ env.version }}
-            ${{ steps.set-product-version.output.prerelease-product-version == '' && format('public.ecr.aws/hashicorp/{0}:light', env.REPO_NAME) }}
-            public.ecr.aws/hashicorp/${{ env.REPO_NAME }}:light-${{ env.version }}
-            public.ecr.aws/hashicorp/${{ env.REPO_NAME }}:${{ env.version }}
-          dev_tags: |
-            docker.io/hashicorppreview/${{ env.REPO_NAME }}:${{ env.version }}
-            docker.io/hashicorppreview/${{ env.REPO_NAME }}:${{ env.version }}-${{ github.sha }}
+  # build-docker-light:
+  #   name: Docker light ${{ matrix.arch }} build
+  #   needs:
+  #     - set-product-version
+  #     - build-linux
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       arch: [ "arm", "arm64", "386", "amd64" ]
+  #   env:
+  #     version: ${{ needs.set-product-version.outputs.product-version }}
+  #   steps:
+  #     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+  #     - name: Docker Build (Action)
+  #       uses: hashicorp/actions-docker-build@v2
+  #       with:
+  #         version: ${{ env.version }}
+  #         target: release-light
+  #         arch: ${{ matrix.arch }}
+  #         tags: |
+  #           ${{ steps.set-product-version.output.prerelease-product-version == '' && format('docker.io/hashicorp/{0}:light', env.REPO_NAME) }}
+  #           docker.io/hashicorp/${{ env.REPO_NAME }}:light-${{ env.version }}
+  #           docker.io/hashicorp/${{ env.REPO_NAME }}:${{ env.version }}
+  #           ${{ steps.set-product-version.output.prerelease-product-version == '' && format('public.ecr.aws/hashicorp/{0}:light', env.REPO_NAME) }}
+  #           public.ecr.aws/hashicorp/${{ env.REPO_NAME }}:light-${{ env.version }}
+  #           public.ecr.aws/hashicorp/${{ env.REPO_NAME }}:${{ env.version }}
+  #         dev_tags: |
+  #           docker.io/hashicorppreview/${{ env.REPO_NAME }}:${{ env.version }}
+  #           docker.io/hashicorppreview/${{ env.REPO_NAME }}:${{ env.version }}-${{ github.sha }}
 
-  build-docker-full:
-    name: Docker full ${{ matrix.arch }} build
-    needs:
-      - set-product-version
-      - build-linux
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        arch: [ "arm", "arm64", "386", "amd64" ]
-    env:
-      version: ${{ needs.set-product-version.outputs.product-version }}
-    steps:
-      - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
-      - name: Docker Build (Action)
-        uses: hashicorp/actions-docker-build@v2
-        with:
-          version: ${{ env.version }}
-          target: release-full
-          arch: ${{ matrix.arch }}
-          tags: |
-            ${{ steps.set-product-version.output.prerelease-product-version == '' && format('docker.io/hashicorp/{0}:full', env.REPO_NAME) }}
-            docker.io/hashicorp/${{ env.REPO_NAME }}:full-${{ env.version }}
-            ${{ steps.set-product-version.output.prerelease-product-version == '' && format('public.ecr.aws/hashicorp/{0}:full', env.REPO_NAME) }}
-            public.ecr.aws/hashicorp/${{ env.REPO_NAME }}:full-${{ env.version }}
-          dev_tags: |
-            docker.io/hashicorppreview/${{ env.REPO_NAME }}:full-${{ env.version }}
-            docker.io/hashicorppreview/${{ env.REPO_NAME }}:full-${{ env.version }}-${{ github.sha }}
+  # build-docker-full:
+  #   name: Docker full ${{ matrix.arch }} build
+  #   needs:
+  #     - set-product-version
+  #     - build-linux
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       arch: [ "arm", "arm64", "386", "amd64" ]
+  #   env:
+  #     version: ${{ needs.set-product-version.outputs.product-version }}
+  #   steps:
+  #     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+  #     - name: Docker Build (Action)
+  #       uses: hashicorp/actions-docker-build@v2
+  #       with:
+  #         version: ${{ env.version }}
+  #         target: release-full
+  #         arch: ${{ matrix.arch }}
+  #         tags: |
+  #           ${{ steps.set-product-version.output.prerelease-product-version == '' && format('docker.io/hashicorp/{0}:full', env.REPO_NAME) }}
+  #           docker.io/hashicorp/${{ env.REPO_NAME }}:full-${{ env.version }}
+  #           ${{ steps.set-product-version.output.prerelease-product-version == '' && format('public.ecr.aws/hashicorp/{0}:full', env.REPO_NAME) }}
+  #           public.ecr.aws/hashicorp/${{ env.REPO_NAME }}:full-${{ env.version }}
+  #         dev_tags: |
+  #           docker.io/hashicorppreview/${{ env.REPO_NAME }}:full-${{ env.version }}
+  #           docker.io/hashicorppreview/${{ env.REPO_NAME }}:full-${{ env.version }}-${{ github.sha }}
