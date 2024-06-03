@@ -27,11 +27,11 @@ var (
 	// for tests to work.
 	// A pre-release marker for the version can also be specified (e.g -dev). If this is omitted
 	// The main version number that is being run at the moment.
-	Version string = "1.8.6"
+	Version string = "1.11.0"
 	// A pre-release marker for the version. If this is "" (empty string)
 	// then it means that it is a final release. Otherwise, this is a pre-release
 	// such as "dev" (in development), "beta", "rc1", etc.
-	VersionPrerelease string
+	VersionPrerelease string = "incognia"
 	// VersionMetadata may be added to give more non-normalised information on a build
 	// like a commit SHA for example.
 	//
