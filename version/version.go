@@ -31,7 +31,7 @@ var (
 	// A pre-release marker for the version. If this is "" (empty string)
 	// then it means that it is a final release. Otherwise, this is a pre-release
 	// such as "dev" (in development), "beta", "rc1", etc.
-	VersionPrerelease string = "incognia"
+	VersionPrerelease string = ""
 	// VersionMetadata may be added to give more non-normalised information on a build
 	// like a commit SHA for example.
 	//
