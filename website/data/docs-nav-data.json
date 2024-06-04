@@ -101,6 +101,10 @@
         "path": "templates"
       },
       {
+        "title": "JSON to HCL2",
+        "path": "templates/json_to_hcl"
+      },
+      {
         "title": "HCL Templates",
         "routes": [
           {
@@ -440,6 +444,14 @@
                     "path": "templates/hcl_templates/functions/encoding/urlencode"
                   },
                   {
+                    "title": "textencodebase64",
+                    "path": "templates/hcl_templates/functions/encoding/textencodebase64"
+                  },
+                  {
+                    "title": "textdecodebase64",
+                    "path": "templates/hcl_templates/functions/encoding/textdecodebase64"
+                  },
+                  {
                     "title": "yamldecode",
                     "path": "templates/hcl_templates/functions/encoding/yamldecode"
                   },
@@ -726,6 +738,14 @@
             "path": "datasources/hcp"
           },
           {
+            "title": "Version",
+            "path": "datasources/hcp/hcp-packer-version"
+          },
+          {
+            "title": "Artifact",
+            "path": "datasources/hcp/hcp-packer-artifact"
+          },
+          {
             "title": "Iteration",
             "path": "datasources/hcp/hcp-packer-iteration"
           },
@@ -831,6 +851,24 @@
     "path": "configure"
   },
   {
+    "title": "Release notes",
+    "routes": [
+      {
+        "title": "v1.11",
+        "path": "release-notes/v1_11"
+      }
+    ]
+  },
+  {
+    "title": "Upgrades",
+    "routes": [
+      {
+        "title": "Upgrade to v1.11",
+        "path": "upgrade/v1_11"
+      }
+    ]
+  },
+  {
     "divider": true
   },
   {
@@ -842,11 +880,7 @@
       },
       {
         "title": "Installing Plugins",
-        "path": "plugins/install-plugins"
-      },
-      {
-        "title": "External Plugins",
-        "href": "/plugins"
+        "path": "plugins/install"
       },
       {
         "title": "Developing Plugins",
@@ -882,6 +916,10 @@
   {
     "title": "Integration Program",
     "path": "partnerships"
+  },
+  {
+    "title": "Community Tools",
+    "path": "community-tools"
   },
   {
     "divider": true
