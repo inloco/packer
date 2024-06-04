@@ -61,5 +61,3 @@ What does **unmaintained** mean?
 1. No active development will be performed by HashiCorp.
 
 If you are interested in maintaining an unmaintained or archived plugin, please reach out to us at packer@hashicorp.com.
-
-
