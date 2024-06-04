@@ -317,10 +317,10 @@ github.com/huandu/xstrings v1.3.2/go.mod h1:y5/lhBue+AyNmUVz9RLU9xbLR0o4KIIExikq
 github.com/imdario/mergo v0.3.11/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=
 github.com/imdario/mergo v0.3.12 h1:b6R2BslTbIEToALKP7LxUvijTsNI9TAe80pLWN2g/HU=
 github.com/imdario/mergo v0.3.12/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=
-github.com/inloco/packer-plugin-amazon v1.3.3 h1:91zIwXrahJ5XgtUhbjwgbXPP1pgzGUEYXzBgAJFERAw=
-github.com/inloco/packer-plugin-amazon v1.3.3/go.mod h1:OJoI+S5/6RIrk+ItN6KsidwlrZnJUEIi1OzdZfdG0vQ=
-github.com/inloco/packer-plugin-sdk v0.5.4 h1:q8AIkPujK4Ccl0qL/MCisY5HVb2c0aucaKCyChOtMPk=
-github.com/inloco/packer-plugin-sdk v0.5.4/go.mod h1:DH6SOIAdO3t0IXS5tgiJwfPi+ougQgZA5pkJUPdMSSw=
+github.com/inloco/packer-plugin-amazon v1.3.4 h1:IE+kpkXSZ84IR9w8hxr3kqkLhJ95Z8eZvtUud/w00ks=
+github.com/inloco/packer-plugin-amazon v1.3.4/go.mod h1:QYY7JsWZ50fUXJluBpczmNKS4Q0hZIt0lTgNeGsts2Y=
+github.com/inloco/packer-plugin-sdk v0.5.5 h1:yuGz3tdIeidyFkJd53ix23098ujY+o4o+Nv6ffJ7wC4=
+github.com/inloco/packer-plugin-sdk v0.5.5/go.mod h1:Pl45K5CM+ihde0eC4erZ3aBPHVYZitW1f8ZqrXXL9w4=
 github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 h1:BQSFePA1RWJOlocH6Fxy8MmwDt+yVQYULKfN0RoTN8A=
 github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99/go.mod h1:1lJo3i6rXxKeerYnT8Nvf0QmHCRC1n8sfWVwXF2Frvo=
 github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 h1:IPJ3dvxmJ4uczJe5YQdrYB16oTJlGSC/OyZDqUk9xX4=

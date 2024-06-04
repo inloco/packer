@@ -194,6 +194,6 @@ go 1.21
 
 replace github.com/zclconf/go-cty => github.com/nywilken/go-cty v1.13.3 // added by packer-sdc fix as noted in github.com/hashicorp/packer-plugin-sdk/issues/187
 
-replace github.com/hashicorp/packer-plugin-amazon => github.com/inloco/packer-plugin-amazon v1.3.3
+replace github.com/hashicorp/packer-plugin-amazon => github.com/inloco/packer-plugin-amazon v1.3.4
 
-replace github.com/hashicorp/packer-plugin-sdk => github.com/inloco/packer-plugin-sdk v0.5.4
+replace github.com/hashicorp/packer-plugin-sdk => github.com/inloco/packer-plugin-sdk v0.5.5
