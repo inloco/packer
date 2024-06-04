@@ -52,7 +52,7 @@ a minimum Packer version that has behavior expected by the configuration.
 later.
 
 The `required_plugins` block specifies all of the plugins required by the
-current config, mapping each local plugin name to a source address and a
+current template, mapping each local plugin name to a source address and a
 version constraint.
 
 ```hcl
@@ -66,7 +66,73 @@ packer {
 }
 ```
 
-For more information, see [Plugins](/docs/plugins).
+Using the `required_plugins` block to codify the plugins required for invoking a 
+`packer build` on your template(s) is a great way to ensure consistent builds across
+different platforms or hosts.
+
+The block codifies two pieces of information that we've found critical to ensure reproducible builds:
+1. **The source of a required plugin** indicates to users where a plugin where a plugin was downloaded from
+and where to reach out if there are issues with the plugin. 
+1. **The version of a required plugin** indicates to users the exact or minimum version needed for the build. 
+This is a great way to pin approved versions of a plugin that can be installed across your environment or team.
+
+For more information on plugins, refer to [Plugins](/packer/docs/plugins).
+
+## Source Addresses
+
+A plugin's source address is conceptually where a plugin binary can be downloaded from. Packer also uses this source as a global unique identifier. 
+When used in conjunction with the `packer init` command a plugin's source address tells Packer where to download it. 
+
+At minimum source addresses consist of three parts delimited by slashes (`/`), as
+follows:
+
+-> **Note:** In Packer 1.11 and later source addresses support one or more sub-folder paths
+after the hostname to support users who require source addresses with more than three parts. 
+While `packer init` only supports remote installation of GitHub source addresses, running `packer init` on 
+plugins with custom source addresses allows users to take advantages of version pinning features offered by the 
+`required_plugins` block. For details on installing plugins using custom source addresses refer to [packer plugins install](/packer/docs/commands/plugins/install).
+
+`<HOSTNAME>/<NAMESPACE>/<TYPE>`
+
+- **Hostname:** The hostname of the location/service that
+  distributes the plugin.
+
+- **Namespace:** An organizational namespace within the specified host.
+  This often is the organization that publishes the plugin.
+
+- **Type:** A short name for the platform or system the plugin manages. The
+  type is usually the plugin's preferred local name.
+
+For example, the fictional `myawesomecloud` plugin could belong to the
+`hashicorp` namespace on `github.com`, so its `source` could be
+`github.com/hashicorp/myawesomecloud`,
+
+-> Note: the actual _repository_ that myawesomecloud comes from must always have
+the name format `github.com/hashicorp/packer-plugin-myawesomecloud`, but the
+`required_plugins` block omits the redundant `packer-plugin-` repository prefix
+for brevity.
+
+The source address with all components given explicitly is called the
+plugin's _fully-qualified address_. You will see fully-qualified address in
+various outputs, like error messages.
+
+### Non-GitHub Source Addresses
+As mentioned above a plugin's source address is its global identifier that provides users codified information on where a plugin is sourced and can be obtained. 
+In cases where a plugin source does not originate from a GitHub repository, such as a plugin binary store, custom source addresses can help
+users taken advantage of plugin version pinning via required_plugins block and forego the use of `packer init` in favor of `packer plugins install --path`.
+
+For example if your organization has a need for pre-downloading approved Packer plugins into an internal artifact store (e.g mycompany.com/mirror/hashicorp/happycloud)
+you can use the `packer plugins install --path` command to install the binary with the custom source address and add an entry for it as a required plugin in your template. 
+
+```shellsession
+packer plugins install --path path/to/binary mycompany.com/mirror/hashicorp/happycloud
+```
+
+The provided source address will translate directly to the file hierarchy in which the plugin binaries will be installed.
+After a successful installation the custom source address can be added to your template to take advantage of version pinning for the `mycompany.com/mirror/hashicorp/happycloud` plugin. 
+Invoking `packer init` on the template will respond without error and ensure that the correct version of the plugin is loaded. 
+
+If however, the plugin is not installed at the time you run `packer init` Packer will error indicating that only GitHub source addresses are supported for remote installation. 
 
 ## Version Constraints
 
@@ -83,7 +149,7 @@ other dependency management systems like Bundler and NPM.
 required_version = ">= 1.2.0, < 2.0.0"
 ```
 
-A version constraint is a [string literal](/docs/templates/hcl_templates/expressions#string-literals)
+A version constraint is a [string literal](/packer/docs/templates/hcl_templates/expressions#string-literals)
 containing one or more conditions, which are separated by commas.
 
 Each condition consists of an operator and a version number.
